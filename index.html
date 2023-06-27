@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customizable Chocolate Bundle</title>
+    <style>
+        /* Add some basic styles to make it visually appealing */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #4CAF50;
+        }
+
+        h1 {
+            text-align: center;
+        }
+/* 
+        .card {
+          display: grid;
+          grid-template-columns: repeat(2,1fr);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 400px;
+            height: 200px;
+        } */
+        .card {
+    display: inline-block;
+    width: 400px;
+    height: 300px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+
+}
+
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity input {
+            width: 30px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customizable Chocolate Bundle</h1>
+    <div id="chocolate-items">
+        <div class="card">
+            <h3>Dairy Milk</h3>
+            <img src="/choclate1.jpg" style="width: 100%; height: 100%" alt="chocolate1.name" />
+            <p>Price: $5</p>
+            <div class="quantity">
+                <button onclick="decrement(0)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(0)">+</button>
+            </div>
+        </div>
+
+        <!-- Add more cards for other chocolate items -->
+        <!-- Make sure to adjust the increment and decrement function calls with unique index values -->
+
+        <div class="card">
+            <h3>Heart Choclate</h3>
+            <img src="/choclate2.jpg" style="width: 100%; height: 100%" alt="chocolate2.name" />
+            <p>Price: $20</p>
+            <div class="quantity">
+                <button onclick="decrement(1)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(1)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>White Forest</h3>
+            <img src="/choclate3.jpg" style="width: 100%; height: 100%" alt="chocolate3.name" />
+            <p>Price: $30</p>
+            <div class="quantity">
+                <button onclick="decrement(2)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(2)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>MilkyBar</h3>
+            <img src="/choclate4.jpg" style="width: 100%; height: 100%" alt="chocolate4.name" />
+            <p>Price: $50</p>
+            <div class="quantity">
+                <button onclick="decrement(3)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(3)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Cream choclate</h3>
+            <img src="/choclate5.jpg" style="width: 100%; height: 100%" alt="chocolate5.name" />
+            <p>Price: $78</p>
+            <div class="quantity">
+                <button onclick="decrement(4)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(4)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Bulky bar</h3>
+            <img src="/choclate6.jpg" style="width: 100%; height: 100%" alt="chocolate6.name" />
+            <p>Price: $66</p>
+            <div class="quantity">
+                <button onclick="decrement(5)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(5)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Almond choclate</h3>
+            <img src="/choclate7.jpg" style="width: 100%; height: 100%" alt="chocolate7.name" />
+            <p>Price: $777</p>
+            <div class="quantity">
+                <button onclick="decrement(6)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(6)">+</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Chocolate Item 8</h3>
+            <img src="/chcolate8.jpg" style="width: 100%; height: 100%" alt="chocolate8.name" />
+            <p>Price: $3</p>
+            <div class="quantity">
+                <button onclick="decrement(7)">-</button>
+                <input type="text" value="0" readonly>
+                <button onclick="increment(7)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <h2>Total Price: <span id="total-price">$0</span></h2>
+
+    <script>
+        // Get all the quantity inputs and total price element
+        const quantityInputs = document.querySelectorAll('.quantity input');
+        const totalPriceElement = document.getElementById('total-price');
+
+        // Define the prices for each chocolate item
+        const prices = [5, 20, 30, 50, 78, 66, 777, 3];
+
+        // Function to increment the quantity
+        function increment(index) {
+            const input = quantityInputs[index];
+            const currentValue = parseInt(input.value);
+            input.value = currentValue + 1;
+            updateTotalPrice();
+        }
+
+        // Function to decrement the quantity
+        function decrement(index) {
+            const input = quantityInputs[index];
+            const currentValue = parseInt(input.value);
+            if (currentValue > 0) {
+                input.value = currentValue - 1;
+                updateTotalPrice();
+            }
+        }
+
+        // Function to update the total price
+        function updateTotalPrice() {
+            let totalPrice = 0;
+            quantityInputs.forEach((input, index) => {
+                const quantity = parseInt(input.value);
+                const price = prices[index];
+                totalPrice += quantity * price;
+            });
+            totalPriceElement.innerText = '$' + totalPrice.toFixed(2);
+        }
+    </script>
+</body>
+</html>
